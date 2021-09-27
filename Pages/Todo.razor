@@ -1,0 +1,118 @@
+﻿@page "/todo"
+@using System.Globalization
+
+<h1 class="display-3">To-Do (@todos.Count(todo => !todo.IsDone))</h1>
+<p class="lead">Handling user input with C#</p>
+
+<div class="card">
+    <div class="card-header text-white" style="background-color: #3a0647"><h6>Input Form</h6></div>
+    <div class="card-body">
+        <h5 class="card-title">What do you have to do?</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <input placeholder="Something to-do" @bind="newTodo" style="display:inline-block;" />
+            </div>
+            <div class="col-md-6 text-left">
+                <button @onclick="AddTodo" class="btn btn-secondary btn-sm">Add to-do</button>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<br />
+
+<table class="table table-sm table-hover caption-top">
+    <caption style="caption-side: top;">List of Todos - (@todos.Count(todo => !todo.IsDone)) remaining</caption>
+    <thead>
+        <tr>
+            <th scope="col">Completed?</th>
+            <th scope="col">Item</th>
+            <th scope="col">Due By</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in todos)
+        {
+            <tr>
+                <td><input type="checkbox" @onchange="() => MarkAsComplete(todo)" /></td>
+                <td><input @bind="todo.Title" /></td>
+                <td>@todo.DueDate.ToString("MM/dd/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<div class="placeholder col-md-12 bg-dark"></div>
+
+@* <ul class="list-unstyled">
+    @foreach (var todo in todos)
+    {
+        // add a checkbox to keep track of completed items
+        <li>
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input @bind="todo.Title" />
+        </li>
+    }
+</ul> *@
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="lead">Add form input elements to collect data</p>
+        <p><span class="mark">@@bind</span> is used on the <strong>input</strong> element to associate it to the newTodo item</p>
+        <p><span class="mark">@@onclick</span> attribute references the C# method in the <strong>@@code</strong> block <i>(AddTodo)</i></p>
+   </div>
+</div>
+
+<div class="row">
+    <p class="lead">Bind a collection of TodoItem objects to HTML in Blazor...
+        <ol>
+            <li>Add a field for the todo items in the @@code block</li>
+            <li>Add unordered list markup and a foreach loop to render each todo item as a list item</li>
+
+    </ol>
+        <p class="lead">The component uses @@code to maintain state of the todo list</p>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <ol>
+            <li>Declare a new collection</li>
+            <li>Create a container for new todo title</li>
+            <li>Write method to add a new todo</li>
+                <ul>
+                    <li>Check to see if value was entered</li>
+                    <li>If not null or whitespace, add new Todo item and set the Title to newTodo (input text)</li>
+                    <li>Reset <strong>newToDo</strong> to an empty string</li>
+                </ul>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <p class="lead"><span class="mark">newTodo</span> is defined in the <span class="mark">@@code</span> block and is bound to the <span class="mark">input</span> control</p>
+</div>
+
+
+@code {
+    private List<TodoItem> todos = new List<TodoItem>();
+    private string newTodo; // container for title of new todo item
+
+    private void AddTodo() // event handler for button onclick
+    {
+        // Todo: add the Todo
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Id = (todos.Count + 1), Title = newTodo, IsDone = false, DueDate = DateTime.Today });
+            newTodo = string.Empty;
+        }
+    }
+
+    // Remove the item when the checkbox is checked
+    private void MarkAsComplete(TodoItem item)
+    {
+        item.IsDone = true;
+        todos.Remove(item);
+    }
+}

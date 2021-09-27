@@ -1,0 +1,59 @@
+@page "/notes"
+
+<h1 class="display-3">Blazor</h1>
+<p class="lead">Build interactive client-side web UI with .NET</p>
+<ul>
+    <li>Create interactive UIs using C# instead of JavaScript</li>
+    <li>Share server-die and client-side app logic written in .NET</li>
+    <li>Renders the UI as HTML & CSS for modern browsers (including mobile)</li>
+    <li>Benefit from .NET performance, reliability and security</li>
+    <li>Can use Visual Studio or VS Code on Windows, Linux and macOS</li>
+    <li>Common set of languages, frameworks, tools</li>
+</ul>
+
+<p class="lead">Blazor apps are based on components</p>
+<p><strong>Components</strong> are portions of UI, such as page, dialog, or data entry form</p>
+<ul>
+    <li>Define flexible UI rendering logic</li>
+    <li>Handle user events (button click, input change, form submit)</li>
+    <li>Can be nested and reused</li>
+    <li>Shared and distributed as <strong>Razor class libraries</strong> or <strong>NuGet packages</strong></li>
+</ul>
+<p>Unlike Razor Pages and MVC, <span class="mark">components</span> are specifically used for client-side UI logic and composition</p>
+
+<p class="lead">Razor components</p>
+<p><strong>Razor</strong> is a <span class="mark">markup syntax</span> that uses HTML and C# for writing UI components
+    of Blazor web apps.</p>
+<ul class="list-unstyled">
+    <li>Razor is based on ASP.NET and designed for creating web apps.</li>
+    <li>Razor components represent a portion of the app UI and are built into .NET classes at compile time and include
+        common UI elements like <span class="mark">state</span>, <span class="mark">rendering logic</span>, <span
+            class="mark">lifecycle methods</span>, and <span class="mark">event handlers</span>.</li>
+    <li>Each <strong>.razor</strong> file has a <span class="mark">page directive</span> that defines what happens when
+        a request for it is made in the browser (routing)</li>
+</ul>
+<p class="lead">Directives</p>
+<p><span class="mark"><strong>@@expression()</strong></span> to add a C# statement inline with HTML</p>
+<p><span class="mark"><strong>@@code</strong> directive</span> is the place where you write C# code directly on your
+    page</p>
+<p><span class="mark"><strong>@@functions</strong></span> section can be added to the template for methods and
+    properties (added to top of generated class, where the document can reference them)</p>
+<p><span class="mark"><strong>@@Page</strong></span> directive is a special markup that identifies a component as a page
+    <i>(use this directive to specify a <strong>route</strong>)</i></p>
+<p><span class="mark"><strong>@@bind</strong></span> is used to bind a C# variable to an HTML object (define C# variable
+    by name as a string in HTML) </p>
+<ul class="list-unstyled">
+    <li>Write C# in the same file as your HTML, CSS, JS code</li>
+    <li>You can set properties on a child component using <span class="mark">component parameters.</span><br /> Define
+        what the component will accept and how to handle the parameters given to it</li>
+</ul>
+<p class="lead">Data binding and events</p>
+<ul class="list-unstyled"> Two common approaches on adding logic to Blazor apps... <li>Use <u>separate</u> code files to
+        store app logic (great for long/complex business logic, or has multiple classes <span
+            class="mark"><i>(code-behind)</i></span>.</li>
+    <li>Mix HTML and C# in a single Razor component file (works well for simple components with lighter code
+        requirements)<br /> Use <strong>directives</strong> to add code into a Razor file <span
+            class="mark"><i>(inline)</i></span></li>
+</ul>
+<p>Mix</p>
+<hr />

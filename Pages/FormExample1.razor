@@ -1,0 +1,47 @@
+@page "/form-example-1"
+@using Microsoft.Extensions.Logging
+@inject ILogger<FormExample1> Logger
+
+<h1 class="display-3">Forms & Validation</h1>
+
+@*
+    EditForm creates an EditContext based on the assigned model instance.
+    EditContext tracks metadata abot the edit process including which fields have
+    been modified and the current validation messages.
+
+    Assigning to either EditForm.Model or EditForm.EditContext can bind a form to data
+*@
+    <EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
+        <div class="form-group">
+            <div class="row">
+            <div class="col-md-8">
+            <InputText id="name" @bind-Value="exampleModel.Name" class="form-control" placeholder="Enter name" />
+            </div>
+            <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </div>
+    </EditForm>
+
+@code {
+    // EditForm form submit callbacks
+    // 1. OnValidSubmit - event handler to run when a form with valid fields is submitted
+    // 2. OnInvalidSubmit - event handler to run when a form with invalid fields is submitted
+    // 3. OnSubmit - event handler to run regardless of the form fields' validation status. The
+    // form is validated by calling EditContext.Validate in the event handler method
+    // If validate returns true, the form is valid.
+    private ExampleModel exampleModel = new ExampleModel();
+
+    private void HandleValidSubmit()
+    {
+        Logger.LogInformation("HandleValidSubmit called");
+
+        // Process the valid form
+    }
+}

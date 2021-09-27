@@ -1,0 +1,29 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+@* @variableName - uses a variable from the @code block below *@
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    //the count resets it's default value each time the page is requested
+    private int currentCount = 0;
+
+
+    // component parameters are specified using attributes or child content
+    // which allows you to set properties on the child component
+
+    // attribute - designates property as a parameter
+
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
+    private void IncrementCount() // gets called by button @onclick event
+    {
+        // currentCount++;
+        currentCount += IncrementAmount;
+    }
+}
+
